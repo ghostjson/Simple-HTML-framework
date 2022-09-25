@@ -25,6 +25,7 @@ class SFRouter {
     this._initRoutes();
     this.routeMap = [];
     this._prepareRouteMap();
+    this._checkCurrentRoute();
   }
 
   _prepareRouteMap() {
@@ -60,7 +61,7 @@ class SFRouter {
   goto(link) {
     const href = this.routeMap[link];
     this.loadPage(href);
-    window.history.pushState({}, "", link);
+    window.history.pushState({}, "", "#/" + link);
   }
 
   _initRoutes() {
@@ -70,6 +71,14 @@ class SFRouter {
         this.goto(link.getAttribute("to"));
       });
     });
+  }
+
+  _checkCurrentRoute() {
+    const path = location.href;
+    if (path.includes("#")) {
+      const href = path.split("#/")[1];
+      this.goto(href);
+    }
   }
 }
 
