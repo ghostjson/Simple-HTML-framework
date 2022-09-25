@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <!-- Simple framework script -->
+    <script src="../../simple-framework.js"></script>
+
+    <style>
+      li {
+        color: blue;
+      }
+      li:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Tags with to acts as links -->
+    <nav>
+      <li to="home">Home</li>
+      <li to="test">Test 2</li>
+    </nav>
+
+    <!-- SF Router is the router outlet -->
+    <sf-router>
+      <!-- List of routes and its corresponding document paths -->
+      <sf-route href="./home.html" route="home" default></sf-route>
+      <sf-route href="./test2.html" route="test"></sf-route>
+    </sf-router>
+  </body>
+</html>
