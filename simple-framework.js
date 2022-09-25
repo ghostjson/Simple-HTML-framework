@@ -33,6 +33,10 @@ class SFRouter {
       const routeName = route.getAttribute("route");
       const href = route.getAttribute("href");
       this.routeMap[routeName] = href;
+
+      if (route.hasAttribute("default")) {
+        this.loadPage(href);
+      }
     });
   }
 
