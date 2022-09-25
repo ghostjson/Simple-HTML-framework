@@ -55,6 +55,7 @@ class SFRouter {
   goto(link) {
     const href = this.routeMap[link];
     this.loadPage(href);
+    window.history.pushState({}, "", link);
   }
 
   _initRoutes() {
