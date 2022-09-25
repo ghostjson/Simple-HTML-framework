@@ -44,6 +44,11 @@ class SFRouter {
     const routerOutlet = document.getElementsByTagName("sf-router")[0];
     const htmlContents = await this._getHtmlContents(location);
     routerOutlet.innerHTML = htmlContents;
+
+    const scripts = routerOutlet.querySelectorAll("script");
+    scripts.forEach((script) => {
+      eval(script.innerText);
+    });
   }
 
   async _getHtmlContents(location) {
@@ -68,7 +73,7 @@ class SFRouter {
   }
 }
 
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
   new SFRouter();
 });
 /** **/
