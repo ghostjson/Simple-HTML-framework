@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <!-- Simple framework script -->
+    <script src="../../simple-framework.js"></script>
+  </head>
+
+  <body>
+    <!-- Basic conditons -->
+    <div cond="true">This shows</div>
+    <div cond="false">Hi!, I'm invisible</div>
+
+    <hr />
+
+    <!-- Toggle implementation -->
+    <div cond="true" id="hello">Hi! Hello!</div>
+    <button onclick="toggle()" id="button">Toggle</button>
+
+    <script>
+      let isVisible = true;
+      const toggle = () => {
+        if (isVisible) {
+          document.getElementById("hello").setAttribute("cond", "false");
+          isVisible = false;
+        } else {
+          document.getElementById("hello").setAttribute("cond", "true");
+          isVisible = true;
+        }
+        render();
+      };
+    </script>
+
+    <hr />
+
+    <!-- Conditions with expression -->
+    <div cond="2*2 === 4">Haha I'm complex</div>
+    <div cond="2*2 === 5">I'm dumb</div>
+  </body>
+</html>

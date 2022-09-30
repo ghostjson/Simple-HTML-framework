@@ -102,6 +102,9 @@ class SFRouter {
     // mount html content to the routerOutlet
     routerOutlet.innerHTML = htmlContents;
 
+    // render conditions
+    window.render();
+
     // run each scripts inside html documents
     const scripts = routerOutlet.querySelectorAll("script");
     scripts.forEach((script) => {
@@ -139,3 +142,54 @@ window.addEventListener("DOMContentLoaded", () => {
   new SFRouter();
 });
 /** **/
+
+/**
+ * ConditionalRenderer
+ * Function to render condition, based on the attribute 'cond'
+ */
+class ConditionRenderer {
+  constructor(elements) {
+    // if elements passed, render only at that elements
+    if (elements) {
+      this.elements = elements.querySelectorAll("[cond]");
+    } else {
+      // all elements
+      this.elements = document.querySelectorAll("[cond]");
+    }
+  }
+
+  // renderer
+  render() {
+    // hide all conditions initially
+    document.querySelectorAll("[cond]").forEach((s) => {
+      if (!s.hasAttribute("sf-display")) {
+        s.setAttribute("sf-display", s.style.display || "block");
+        s.style.display = "none";
+      }
+    });
+
+    // render elements based on the condition in 'cond' attribute
+    this.elements.forEach((element) => {
+      const condition = eval(element.getAttribute("cond"));
+      if (condition) {
+        element.style.display = element.getAttribute("sf-display");
+      } else {
+        element.style.display = "none";
+      }
+    });
+  }
+
+  // return a new renderer
+  renderConditons(elements) {
+    return new ConditionRenderer(elements).render();
+  }
+}
+
+// DOM Contents are loaded
+window.addEventListener("DOMContentLoaded", () => {
+  // attach instance of renderer to the window
+  window.render = new ConditionRenderer().renderConditons;
+
+  // render document
+  window.render();
+});
